@@ -3,11 +3,13 @@ url = 'https://pypi.python.org/simple'
 verify_ssl = true
 name = 'pypi'
 
-[dev-packages]
+[packages]
 pandas = '*'
 nltk = '*'
 sklearn = '*'
 numpy = '*'
+jupyter = '*'
+seaborn = '*'
 
 [requires]
 python_version = "3.6"

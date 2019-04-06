@@ -3,9 +3,9 @@ FROM python:3.6.6
 ENV PYTHONPATH /opt/app/
 WORKDIR $PYTHONPATH
 
-RUN pip install pipenv jupyter
+RUN pip install pipenv
 
 COPY Pipfile* $PYTHONPATH
-RUN pipenv install --dev
+RUN pipenv install
 
 COPY . .
