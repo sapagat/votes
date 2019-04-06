@@ -4,5 +4,8 @@ build:
 jupyter: build
 	docker-compose up
 
-shell: build
+python: build
 	docker-compose run --rm app pipenv run python
+
+check:
+	docker-compose run --rm app /bin/sh check_notebooks.sh
