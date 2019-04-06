@@ -2,10 +2,14 @@ import csv
 import pandas as pd
 import re
 import nltk
-from nltk.tokenize import TweetTokenizer
-stopwords = nltk.download('stopwords')
+try:
+    nltk.data.find('corpora/stopwords.zip')
+except LookupError:
+    nltk.download('stopwords')
+
 from nltk.corpus import stopwords
 
+from nltk.tokenize import TweetTokenizer
 from nltk.stem import PorterStemmer
 from sklearn.model_selection import train_test_split
 from nltk import classify
