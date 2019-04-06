@@ -1,0 +1,11 @@
+version: '3.6'
+services:
+  app:
+    build: .
+    volumes:
+      - type: bind
+        source: .
+        target: /opt/app
+    ports:
+      - "9999:9999"
+    command: "/bin/bash -c 'jupyter notebook --ip=0.0.0.0 --port=9999 --no-browser --allow-root'"
