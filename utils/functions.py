@@ -14,27 +14,20 @@ from nltk.stem import PorterStemmer
 from sklearn.model_selection import train_test_split
 from nltk import classify
 from nltk import NaiveBayesClassifier
-
+import os
 import string
 
-DATASET = '../datasets/DatasetCatSpa_collected'
+ROOT_PATH = os.getenv('PYTHONPATH')
+DATASET_FOLDER = os.getenv('DATASET_FOLDER') or 'datasets/'
 
-def parse_input():
-    data = []
-    f = open(DATASET, 'r')
-    for row in csv.reader(f, delimiter= ' '):
-        tweet = {
-            'tweet_id': row[0],
-            'category': row[1],
-            'text': ' '.join(row[3:])
-        }
-        data.append(tweet)
-
+def parse_input_as_dataframe(filename):
+    data = parse_input_as_dictonary(filename)
     return pd.DataFrame(data)
 
-def parse_input_as_dictonary():
+def parse_input_as_dictonary(filename):
+    path = ROOT_PATH + DATASET_FOLDER + filename
     data = []
-    f = open(DATASET, 'r')
+    f = open(path, 'r')
     for row in csv.reader(f, delimiter= ' '):
         tweet = {
             'tweet_id': row[0],
