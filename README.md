@@ -3,24 +3,28 @@
 This repository contains some analysis and datasets related to the competition "Stance and Gender Detection in Tweets
 on Catalan Independence@Ibereval 2017". You can find more details [here](http://stel.ub.edu/Stance-IberEval2017/index.html).
 
+## Requirements
+
+- Docker + docker compose
+- Makefile
+
 ## Development
 
-By running `make jupyter` a Jupyter Notebook server will be available in the prompted URL.
+- `make jupyter`: a Jupyter Notebook server will be available in the prompted URL.
+- `make check`: run a check that all the notebooks execute without errors. Useful for refactoring into functions.
 
 ## Datasets
 
-### DatasetCatSpa_collected
-
-This dataset has only two categories contains rows with the following structure:
+The datasets have the following structure:
 
 ```
 <tweet_id> <category>  <text>
 ```
 
-Where the categories are (SPA: Spanish, CAT: catalan).
+Datasets:
 
-For example:
+- `DatasetCatSpa`: categories CAT => catalan, SPA => spanish.
+- `DatasetFavCon`: categories FAVOR, NEUTRAL, AGAINST
+- `DatasetMaFe`: categories FEMALE, MALE
 
-```
-1395 CAT  Gallina de piel. Emocionada. #SomLaHistoria #27S #catalunya #democracia
-```
+They can be found in `datasets` directory and `fixtures` contain the light representation for running checks.
