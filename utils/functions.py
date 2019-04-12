@@ -122,7 +122,11 @@ def labeled_featureset(tweets, pipeline):
     return data
 
 def classify_with_naive_bayes(data, test_size, describe=True, show_top=10):
-    training, test = train_test_split(data, test_size=test_size)
+    training, test = train_test_split(
+        data,
+        test_size=test_size,
+        random_state=random_state()
+    )
 
     classifier = NaiveBayesClassifier.train(training)
     accuracy = classify.accuracy(classifier, test)
@@ -155,8 +159,17 @@ def vocabulary_from(sentences):
     return list(vocabulary)
 
 def classify_with_svm(X, y, test_size, maximum_iterations):
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=42)
-    classifier = svm.SVC(gamma='scale', max_iter=maximum_iterations)
+    X_train, X_test, y_train, y_test = train_test_split(
+        X,
+        y,
+        test_size=test_size,
+        random_state=random_state()
+    )
+    classifier = svm.SVC(
+        gamma='scale',
+        max_iter=maximum_iterations,
+        random_state=random_state()
+    )
     classifier.fit(X_train, y_train)
     y_predicted = classifier.predict(X_test)
     total_correct = np.sum(y_predicted == y_test)
@@ -164,3 +177,6 @@ def classify_with_svm(X, y, test_size, maximum_iterations):
         'total_correct': total_correct,
         'accuracy': float(total_correct) / len(y_test)
     }
+
+def random_state():
+    return 42
