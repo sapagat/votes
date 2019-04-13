@@ -1,5 +1,3 @@
-import csv
-import pandas as pd
 import re
 import nltk
 try:
@@ -17,17 +15,6 @@ from nltk import NaiveBayesClassifier
 import string
 import numpy as np
 from sklearn import svm
-from . import dataset
-
-def parse_input_as_dataframe(filename):
-    tweets = dataset.read_tweets(filename)
-    return pd.DataFrame(tweets)
-
-def counts_by_category(tweets):
-    query = tweets.groupby('category')
-    query = query.count()
-    query = query.sort_values('tweet_id', ascending=False)
-    return query['tweet_id']
 
 def remove_characters_from_tweet(tweet):
     tweet = remove_old_style_retweet_text(tweet)
