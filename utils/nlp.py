@@ -13,10 +13,16 @@ import string
 def run_pipeline(tweets, pipeline):
     data = []
     for tweet in tweets:
-        sample = _process_unit(pipeline, tweet['text'])
+        sample = process_unit(pipeline, tweet['text'])
         label = tweet['category']
         data.append((sample, label))
     return data
+
+def process_unit(pipeline, unit):
+    result = unit
+    for command in pipeline:
+        result = command(result)
+    return result
 
 def remove_old_style_retweet_text(tweet):
     return re.sub(r'^RT[\s]+', '', tweet)
@@ -68,9 +74,3 @@ def stem(words):
 
 def bag_of_words(words):
     return dict([word, True] for word in words)
-
-def _process_unit(pipeline, unit):
-    result = unit
-    for command in pipeline:
-        result = command(result)
-    return result
