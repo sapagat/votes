@@ -14,30 +14,14 @@ from nltk.stem import PorterStemmer
 from sklearn.model_selection import train_test_split
 from nltk import classify
 from nltk import NaiveBayesClassifier
-import os
 import string
 import numpy as np
 from sklearn import svm
-
-ROOT_PATH = os.getenv('PYTHONPATH')
-DATASET_FOLDER = os.getenv('DATASET_FOLDER') or 'datasets/'
+from . import dataset
 
 def parse_input_as_dataframe(filename):
-    data = parse_input_as_dictonary(filename)
-    return pd.DataFrame(data)
-
-def parse_input_as_dictonary(filename):
-    path = ROOT_PATH + DATASET_FOLDER + filename
-    data = []
-    f = open(path, 'r')
-    for row in csv.reader(f, delimiter= ' '):
-        tweet = {
-            'tweet_id': row[0],
-            'category': row[1],
-            'text': ' '.join(row[3:])
-        }
-        data.append(tweet)
-    return data
+    tweets = dataset.read_tweets(filename)
+    return pd.DataFrame(tweets)
 
 def counts_by_category(tweets):
     query = tweets.groupby('category')
