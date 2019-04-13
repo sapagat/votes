@@ -1,22 +1,6 @@
 from sklearn.model_selection import train_test_split
-from nltk import classify
-from nltk import NaiveBayesClassifier
 import numpy as np
 from sklearn import svm
-
-def classify_with_naive_bayes(data, test_size, describe=True, show_top=10):
-    training, test = train_test_split(
-        data,
-        test_size=test_size,
-        random_state=random_state()
-    )
-
-    classifier = NaiveBayesClassifier.train(training)
-    accuracy = classify.accuracy(classifier, test)
-    return {
-        'accuracy': accuracy,
-        'classifier': classifier
-    }
 
 def bag_of_words_for_svm(examples):
     vocabulary = vocabulary_from(examples)
