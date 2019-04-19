@@ -3,7 +3,7 @@
 NOTEBOOKS_PATH=notebooks/*.ipynb
 
 execute_notebooks () {
-  DATASET_FOLDER='fixtures/' pipenv run jupyter nbconvert --execute --to notebook $NOTEBOOKS_PATH --stdout > /dev/null
+  DATASET_FOLDER='datasets/fixtures/' pipenv run jupyter nbconvert --execute --to notebook $NOTEBOOKS_PATH --stdout > /dev/null
 }
 
 announce_success () {
