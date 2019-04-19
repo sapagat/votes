@@ -27,6 +27,15 @@ def grid_subsamples(tweets, fractions, replicas):
             data.append(descriptor)
     return pd.DataFrame(data)
 
+def categories_proportion_matrix(tweets, fractions, replicas):
+    data = []
+    for fraction in fractions:
+        for replica in range(replicas):
+            descriptor = percentage_by_category(random_subsample(tweets, fraction))
+            descriptor['fraction'] = fraction
+            data.append(descriptor)
+    return pd.DataFrame(data)
+
 def percentage_by_category(tweets):
     total = tweets.shape[0]
     return (counts_by_category(tweets) / total).to_dict()
